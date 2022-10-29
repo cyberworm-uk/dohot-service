@@ -54,7 +54,7 @@ dnscrypt_servers = false
 
 # imma assume IPv4 only, feel free to tweak this if you are IPv6-capable
 
-block_ipv6 = true
+block_ipv6 = false
 
 # don't let weird queries & typos leak upstream
 
