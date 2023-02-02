@@ -3,7 +3,7 @@ ARG VERSION=master
 WORKDIR /go/src
 RUN git clone --depth=1 -b ${VERSION} https://github.com/DNSCrypt/dnscrypt-proxy.git .
 
-FROM docker.io/library/golang:1.19-alpine AS build
+FROM docker.io/library/golang:alpine AS build
 COPY --from=source /go/src /go/src
 WORKDIR /go/src/dnscrypt-proxy
 RUN go mod download
