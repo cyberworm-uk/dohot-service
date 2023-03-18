@@ -1,4 +1,4 @@
-# doh-server
+# doh-front
 This is a packaged [doh-server](https://github.com/DNSCrypt/doh-server).
 
 It's not part of the main release, but if you wanted to setup DOH for clients to access this, you could do so.
