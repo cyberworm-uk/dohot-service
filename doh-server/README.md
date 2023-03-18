@@ -1,4 +1,4 @@
-# doh-front
+# doh-server
 This is a packaged [doh-server](https://github.com/DNSCrypt/doh-server).
 
 It's not part of the main release, but if you wanted to setup DOH for clients to access this, you could do so.
@@ -8,7 +8,7 @@ It's not part of the main release, but if you wanted to setup DOH for clients to
 - Setup your preferred/existing TLS reverse proxy to proxy `/dns-query`, alternatively specify a custom expected path by passing `-p /your-custom-path` to the container.
 
 ```
-# podman run --rm ghcr.io/guest42069/doh-front:latest --help
+# podman run --rm ghcr.io/guest42069/doh-server:latest --help
 A DNS-over-HTTPS (DoH) and ODoH (Oblivious DoH) proxy
 
 Usage: doh-proxy [OPTIONS]
