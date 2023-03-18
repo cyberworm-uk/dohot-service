@@ -5,7 +5,7 @@ It's not part of the main release, but if you wanted to setup DOH for clients to
 
 - Add `-p 127.0.0.1:3000:3000` to the `dohot` pod so that port 3000 is published.
 - Add an additional container to the pod, `podman run -d --rm --pod dohot --name dohot-dohfront ghcr.io/guest42069/doh-front:latest -l 0.0.0.0:3000 -u 127.0.0.1:53`
-- Setup your preferred/existing TLS reverse proxy to proxy `/dns-query`, alternatively specify a custom expected path by passing `-p /your-custom-path` to the container.
+- Setup your preferred/existing TLS reverse proxy to serve the `/dns-query` path from 127.0.0.1:3000, alternatively specify a custom expected path by passing `-p /your-custom-path` to the container and use that rather than `/dns-query`.
 
 ```
 # podman run --rm ghcr.io/guest42069/doh-front:latest --help
