@@ -1,0 +1,16 @@
+name: remove old doh-front
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '50 22 * * 6'
+jobs:
+  remove-old-doh-front:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/delete-package-versions@v4
+        with: 
+          package-name: 'doh-front'
+          package-type: 'container'
+          min-versions-to-keep: 30
+          delete-only-untagged-versions: 'true'
+          token: ${{ secrets.PAT }}
