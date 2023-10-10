@@ -63,6 +63,7 @@ PublishPort=3000:80/tcp
 Environment=TZ=Europe/London
 Environment=DNSSEC=true
 Environment=PIHOLE_DNS_=systemd-dohot-dnscrypt#5054
+Environment=DNSMASQ_LISTENING=all
 
 [Service]
 Restart=always
