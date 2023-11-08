@@ -73,7 +73,8 @@ TimeoutStartSec=900
 WantedBy=default.target' > dohot-pihole.container
 
 # create the various volumes to store state
-echo '[Volume]' | tee dohot-dnsmasq.volume | tee dohot-pihole.volume | tee dohot-log.volume | tee dohot-tor.volume | tee dohot-dnscrypt.volume
+echo '[Volume]' | tee dohot-dnsmasq.volume | tee dohot-pihole.volume | tee dohot-log.volume | tee dohot-dnscrypt.volume
+echo -en '[Volume]\nUser=100\nGroup=65533\n' | tee dohot-tor.volume
 
 # create the shared network for the containers
 echo '[Network]
