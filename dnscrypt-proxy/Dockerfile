@@ -1,5 +1,5 @@
 FROM --platform=$BUILDPLATFORM docker.io/alpine/git:latest AS source
-ARG VERSION=master
+ARG VERSION=2.1.5
 WORKDIR /go/src
 RUN git clone --depth=1 -b ${VERSION} https://github.com/DNSCrypt/dnscrypt-proxy.git .
 
