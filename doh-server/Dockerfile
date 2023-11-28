@@ -4,7 +4,7 @@ ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 RUN apk add musl-dev pkgconfig openssl-dev sqlite-dev xz-dev --no-cache
 RUN cargo install doh-proxy --no-default-features
 
-FROM docker.io/library/alpine:latest
+FROM ghcr.io/guest42069/base:latest
 COPY --from=build /usr/local/cargo/bin/doh-proxy /bin/doh-proxy
 RUN apk add libgcc --no-cache
 RUN addgroup -S doh && adduser -S doh -G doh
