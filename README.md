@@ -15,8 +15,8 @@ End user devices should be resolving via DNS provided by `pihole` to take advant
 
 `pihole` should not be exposed to the internet at large, lest it be used as part of a DNS amplification attack. It should be listening on a LAN/VPN IP or a packet filter should restrict incoming DNS queries to the `pihole` to only authorized client devices.
 
-Optionally, `doh-front` (container image for [`doh-server`](https://github.com/DNSCrypt/doh-server)) can be used so that the pihole can be configured as a DOH server directly by end user devices (see the [`README`](https://github.com/guest42069/dohot-service/blob/main/doh-server/README.md)).
+Optionally, `doh-front` (container image for [`doh-server`](https://github.com/DNSCrypt/doh-server)) can be used so that the pihole can be configured as a DOH server directly by end user devices (see the [`README`](https://github.com/cyberworm-uk/dohot-service/blob/main/doh-server/README.md)).
 
 Further optionally, as of Arti 1.1.10 it's now capable of listening on arbitrary ports (previously restricted to localhost) which means it's now suitable for deployment in containers.
 
-Replace the existing tor proxy image with an equivalent [`ghcr.io/guest42069/arti:latest`](https://github.com/guest42069/tortainer#arti) if you want to use the experimental rust tor client.
+Replace the existing tor proxy image with an equivalent [`ghcr.io/cyberworm-uk/arti:latest`](https://github.com/cyberworm-uk/tortainer#arti) if you want to use the experimental rust tor client.

@@ -9,8 +9,8 @@ function success_out() {
   echo $1
   exit 0
 }
-podman pull ghcr.io/guest42069/dohproxy:latest || fail_out "Unable to pull dohproxy"
-podman pull ghcr.io/guest42069/torproxy:latest || fail_out "Unable to pull torproxy"
+podman pull ghcr.io/cyberworm-uk/dohproxy:latest || fail_out "Unable to pull dohproxy"
+podman pull ghcr.io/cyberworm-uk/torproxy:latest || fail_out "Unable to pull torproxy"
 podman pull docker.io/pihole/pihole:latest || fail_out "Unable to pull pihole"
 podman pod exists dohot && success_out "Done"
 if [[ $? -eq 1 ]]; then
@@ -27,11 +27,11 @@ if [[ $? -eq 1 ]]; then
     --label "io.containers.autoupdate=registry" \
     --pod dohot \
     -v dohot-var-lib-tor:/var/lib/tor \
-    -d ghcr.io/guest42069/torproxy:latest || fail_out "Unable to run torproxy"
+    -d ghcr.io/cyberworm-uk/torproxy:latest || fail_out "Unable to run torproxy"
   podman run --rm --name dohot-dohproxy \
     --label "io.containers.autoupdate=registry" \
     --pod dohot \
-    -d ghcr.io/guest42069/dohproxy:latest || fail_out "Unable to run dohproxy"
+    -d ghcr.io/cyberworm-uk/dohproxy:latest || fail_out "Unable to run dohproxy"
   # binding to privileged ports.
   podman run --rm --name dohot-pihole \
     --label "io.containers.autoupdate=registry" \
