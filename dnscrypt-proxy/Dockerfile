@@ -5,7 +5,7 @@ RUN git clone --depth=1 -b ${VERSION} https://github.com/DNSCrypt/dnscrypt-proxy
 
 FROM --platform=$BUILDPLATFORM docker.io/library/golang:alpine AS build
 ARG TARGETOS TARGETARCH
-ENV GOOS="$TARGETOS" GOARCH="$TARGETARCH" GOFLAGS="-buildvcs=false -trimpath" CGO_ENABLED=0
+ENV GOOS="$TARGETOS" GOARCH="$TARGETARCH" GOFLAGS="-buildvcs=false -trimpath"
 COPY --from=source /go/src /go/src
 WORKDIR /go/src/dnscrypt-proxy
 RUN --mount=type=cache,target=/go/pkg go mod download
@@ -13,9 +13,8 @@ RUN --mount=type=cache,target=/go/pkg --mount=type=cache,target=/root/.cache/go-
 
 FROM ghcr.io/cyberworm-uk/base:latest
 COPY --from=build /go/src/dnscrypt-proxy/dnscrypt-proxy /dnscrypt-proxy
-RUN apk add --no-cache ca-certificates && mkdir -p /etc/dnscrypt-proxy/ /var/log/dnscrypt-proxy/
+RUN apk add --no-cache ca-certificates && mkdir -p /etc/dnscrypt-proxy/ /var/log/dnscrypt-proxy/ && addgroup -S dnscrypt && adduser -S dnscrypt -G dnscrypt && chown dnscrypt:dnscrypt /etc/dnscrypt-proxy/ /var/log/dnscrypt-proxy/
 COPY dnscrypt-proxy.toml /etc/dnscrypt-proxy/dnscrypt-proxy.toml
-RUN addgroup -S dnscrypt && adduser -S dnscrypt -G dnscrypt && chown dnscrypt:dnscrypt /etc/dnscrypt-proxy/ /var/log/dnscrypt-proxy/
 USER dnscrypt
 EXPOSE 5054/udp
 EXPOSE 5054/tcp
