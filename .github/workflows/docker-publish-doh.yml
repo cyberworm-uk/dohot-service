@@ -1,8 +1,8 @@
-name: Docker-doh-front
+name: Docker Image (dohfront)
 
 on:
   schedule:
-    - cron: '20 16 * * 5'
+    - cron: '30 00 * * 5'
   workflow_dispatch:
 
 env:
