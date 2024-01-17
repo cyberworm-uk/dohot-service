@@ -23,7 +23,7 @@ Restart=always
 TimeoutStartSec=900
 
 [Install]
-WantedBy=default.target' > dohot-dnscrypt.container
+RequiredBy=dohot-pihole.service' > dohot-dnscrypt.container
 
 # create the tor proxy container
 echo '[Unit]
@@ -41,7 +41,7 @@ Restart=always
 TimeoutStartSec=900
 
 [Install]
-WantedBy=default.target' > dohot-tor.container
+RequiredBy=dohot-dnscrypt.service' > dohot-tor.container
 
 # create the pihole container
 echo '[Unit]
