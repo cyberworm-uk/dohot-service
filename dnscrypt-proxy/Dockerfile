@@ -11,13 +11,13 @@ WORKDIR /go/src/dnscrypt-proxy
 RUN --mount=type=cache,target=/go/pkg go mod download
 RUN --mount=type=cache,target=/go/pkg --mount=type=cache,target=/root/.cache/go-build go build -ldflags '-w -s -buildid=' .
 
-FROM ghcr.io/cyberworm-uk/base:latest
-COPY --from=build /go/src/dnscrypt-proxy/dnscrypt-proxy /dnscrypt-proxy
+FROM docker.io/library/alpine:latest
 RUN apk add --no-cache ca-certificates && mkdir -p /etc/dnscrypt-proxy/ /var/log/dnscrypt-proxy/ && addgroup -S dnscrypt && adduser -S dnscrypt -G dnscrypt && chown dnscrypt:dnscrypt /etc/dnscrypt-proxy/ /var/log/dnscrypt-proxy/
-COPY dnscrypt-proxy.toml /etc/dnscrypt-proxy/dnscrypt-proxy.toml
 USER dnscrypt
 EXPOSE 5054/udp
 EXPOSE 5054/tcp
 VOLUME [ "/var/log/dnscrypt-proxy/" ]
 VOLUME [ "/etc/dnscrypt-proxy/" ]
+COPY dnscrypt-proxy.toml /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+COPY --from=build /go/src/dnscrypt-proxy/dnscrypt-proxy /dnscrypt-proxy
 ENTRYPOINT [ "/dnscrypt-proxy", "-config", "/etc/dnscrypt-proxy/dnscrypt-proxy.toml" ]
