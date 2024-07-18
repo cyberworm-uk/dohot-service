@@ -13,7 +13,7 @@ services:
         ipv4_address: 10.69.0.4
 
   dohproxy:
-    image: ghcr.io/cyberworm-uk/dohproxy:latest
+    image: ghcr.io/cyberworm-uk/doh-proxy:latest
     restart: unless-stopped
     volumes:
       - "./dnscrypt-proxy.toml:/etc/dnscrypt-proxy/dnscrypt-proxy.toml"

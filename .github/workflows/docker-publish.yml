@@ -7,6 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  DOCKERHUB_USERNAME: cyberwormuk
 
 jobs:
   ghcr_publish:
@@ -28,11 +29,34 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Log-in to registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKER }}
 
-      - name: Build and push base
-        uses: docker/build-push-action@v5
+      - name: Build and push DOH Proxy
+        uses: docker/build-push-action@v6
+        env:
+          SOURCE_DATE_EPOCH: 0
         with:
           context: dnscrypt-proxy/
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.actor }}/dohproxy:latest
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.actor }}/dohproxy:latest
+            ${{ env.DOCKERHUB_USERNAME }}/dohproxy:latest
+            ${{ env.REGISTRY }}/${{ github.actor }}/doh-proxy:latest
+            ${{ env.DOCKERHUB_USERNAME }}/doh-proxy:latest
+
+      - name: Build and push DOH Front
+        uses: docker/build-push-action@v6
+        env:
+          SOURCE_DATE_EPOCH: 0
+        with:
+          context: doh-server/
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.actor }}/doh-front:latest
+            ${{ env.DOCKERHUB_USERNAME }}/doh-front:latest

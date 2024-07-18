@@ -12,7 +12,7 @@ echo '[Unit]
 Description=DOHOT DNSCrypt container
 
 [Container]
-Image=ghcr.io/cyberworm-uk/dohproxy:latest
+Image=ghcr.io/cyberworm-uk/doh-proxy:latest
 AutoUpdate=registry
 
 Volume=dohot-dnscrypt.volume:/etc/dnscrypt-proxy
@@ -30,7 +30,7 @@ echo '[Unit]
 Description=DOHOT Tor container
 
 [Container]
-Image=ghcr.io/cyberworm-uk/torproxy:latest
+Image=ghcr.io/cyberworm-uk/tor-proxy:latest
 AutoUpdate=registry
 
 Volume=dohot-tor.volume:/var/lib/tor
