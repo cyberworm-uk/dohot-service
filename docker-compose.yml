@@ -2,7 +2,7 @@ version: "3"
 
 services:
   torproxy:
-    image: ghcr.io/cyberworm-uk/torproxy:latest # https://github.com/cyberworm-uk/tortainer
+    image: ghcr.io/cyberworm-uk/tor-proxy:latest # https://github.com/cyberworm-uk/tortainer
     restart: unless-stopped
     volumes:
       - type: volume
