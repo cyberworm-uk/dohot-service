@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  torproxy:
+    image: ghcr.io/cyberworm-uk/tor-proxy:latest # https://github.com/cyberworm-uk/tortainer
+    restart: unless-stopped
+    volumes:
+      - type: volume
+        source: var-lib-tor
+        target: /var/lib/tor
+    networks:
+      pihole_net:
+        ipv4_address: 10.69.0.4
+
+  dohproxy:
+    image: ghcr.io/cyberworm-uk/doh-proxy:latest
+    restart: unless-stopped
+    volumes:
+      - "./dnscrypt-proxy.toml:/etc/dnscrypt-proxy/dnscrypt-proxy.toml"
+#    ports:
+#      - "YOUR_LAN_IP_HERE:53:5054/tcp"
+#      - "YOUR_LAN_IP_HERE:53:5054/udp"
+    networks:
+      pihole_net:
+        ipv4_address: 10.69.0.2
+    depends_on:
+      - torproxy
+
+networks:
+  pihole_net:
+    ipam:
+      config:
+      - subnet: 10.69.0.0/29
+
+volumes:
+  var-lib-tor:

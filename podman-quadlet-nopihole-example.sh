@@ -4,8 +4,7 @@
 
 # you should ensure that the DNS ports are not exposed to the general internet
 # you can either specify a local IP address to bind them to, e.g. PublishPort=192.168.0.2:53:53/tcp
-# or ensure a packetfilter/firewall blocks external access
-
+# or ensure a packetfilter/firewall blocks external acces
 # create the dnscrypt container
 echo '[Unit]
 Description=DOHOT DNSCrypt container
@@ -16,6 +15,9 @@ AutoUpdate=registry
 
 Volume=dohot-dnscrypt.volume:/etc/dnscrypt-proxy
 Network=dohot.network
+
+PublishPort=53:5054/tcp
+PublishPort=53:5054/udp
 
 [Service]
 Restart=always
@@ -42,37 +44,8 @@ TimeoutStartSec=900
 [Install]
 RequiredBy=dohot-dnscrypt.service' > dohot-tor.container
 
-# create the pihole container
-echo '[Unit]
-Description=DOHOT Pi-Hole container
-
-[Container]
-Image=docker.io/pihole/pihole:latest
-AutoUpdate=registry
-
-Volume=dohot-dnsmasq.volume:/etc/dnsmasq.d
-Volume=dohot-pihole.volume:/etc/pihole
-Volume=dohot-log.volume:/var/log/pihole
-Network=dohot.network
-
-PublishPort=53:53/tcp
-PublishPort=53:53/udp
-PublishPort=3000:80/tcp
-
-Environment=TZ=Europe/London
-Environment=DNSSEC=true
-Environment=PIHOLE_DNS_=systemd-dohot-dnscrypt#5054
-Environment=DNSMASQ_LISTENING=all
-
-[Service]
-Restart=always
-TimeoutStartSec=900
-
-[Install]
-WantedBy=default.target' > dohot-pihole.container
-
 # create the various volumes to store state
-echo '[Volume]' | tee dohot-dnsmasq.volume | tee dohot-pihole.volume | tee dohot-log.volume | tee dohot-dnscrypt.volume
+echo '[Volume]' | tee dohot-dnscrypt.volume
 echo -en '[Volume]\nUser=100\nGroup=65533\n' | tee dohot-tor.volume
 
 # create the shared network for the containers
