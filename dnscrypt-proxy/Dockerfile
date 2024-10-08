@@ -13,8 +13,9 @@ RUN --mount=type=cache,target=/go/pkg --mount=type=cache,target=/root/.cache/go-
 
 FROM docker.io/library/alpine:latest
 LABEL org.opencontainers.image.base.name="docker.io/library/alpine"
-LABEL org.opencontainers.image.title="DNSCrypt Proxy"
-LABEL org.opencontainers.image.description="DNSCrypt Proxy built for alpine as part of DOHOT"
+LABEL org.opencontainers.image.title="DNSCrypt Proxy (Resolver)"
+LABEL org.opencontainers.image.description="DNSCrypt Proxy (Resolver) built for alpine as part of DOHOT"
+LABEL org.opencontainers.image.source="https://github.com/cyberworm-uk/dohot-service.git"
 RUN apk add --no-cache ca-certificates && mkdir -p /etc/dnscrypt-proxy/ /var/log/dnscrypt-proxy/ && addgroup -S dnscrypt && adduser -S dnscrypt -G dnscrypt && chown dnscrypt:dnscrypt /etc/dnscrypt-proxy/ /var/log/dnscrypt-proxy/
 USER dnscrypt
 EXPOSE 5054/udp
