@@ -2,7 +2,7 @@ version: "3"
 
 services:
   torproxy:
-    image: ghcr.io/cyberworm-uk/tor-proxy:latest # https://github.com/cyberworm-uk/tortainer
+    image: ghcr.io/cyberworm-uk/tor-client:latest # https://github.com/cyberworm-uk/tortainer
     restart: unless-stopped
     volumes:
       - type: volume
@@ -13,7 +13,7 @@ services:
         ipv4_address: 10.69.0.4
 
   dohproxy:
-    image: ghcr.io/cyberworm-uk/doh-proxy:latest
+    image: ghcr.io/cyberworm-uk/dnscrypt-proxy:latest
     restart: unless-stopped
     volumes:
       - "./dnscrypt-proxy.toml:/etc/dnscrypt-proxy/dnscrypt-proxy.toml"
