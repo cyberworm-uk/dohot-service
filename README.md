@@ -3,6 +3,11 @@ DNS Over HTTPS over Tor for Anonymized DNS with adblocking, with [Pi-Hole](https
 
 Cribbed from [Alec Muffett's DoHoT](https://github.com/alecmuffett/dohot).
 
+# Update
+
+As part of general improvements, I've consolidated and reformatted the backing containers. `tor-proxy` is now `tor-client` and `dohot-proxy` is now `dnscrypt-proxy`.
+
+The associated [dockerfiles are available here](https://github.com/cyberworm-uk/containers).
 
 # Overview
 `tor` is run as a client, exposing a SOCKS proxy.
