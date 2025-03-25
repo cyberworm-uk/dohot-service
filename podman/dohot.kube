@@ -1,0 +1,14 @@
+[Kube]
+AutoUpdate=registry
+Yaml=dohot.yaml
+#PublishPort=YOUR_LAN_IP_HERE:3000:80
+#PublishPort=YOUR_LAN_IP_HERE:53:53
+#PublishPort=YOUR_LAN_IP_HERE:53:53/udp
+Network=dohot.network
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,13 @@
+[Kube]
+AutoUpdate=registry
+Yaml=dohot-nopihole.yaml
+#PublishPort=YOUR_LAN_IP_HERE:53:5054
+#PublishPort=YOUR_LAN_IP_HERE:53:5054/udp
+Network=dohot.network
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=default.target

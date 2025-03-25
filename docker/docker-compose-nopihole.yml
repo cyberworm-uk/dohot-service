@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     volumes:
       - "./dnscrypt-proxy.toml:/etc/dnscrypt-proxy/dnscrypt-proxy.toml"
-#    ports:
+    ports:
 #      - "YOUR_LAN_IP_HERE:53:5054/tcp"
 #      - "YOUR_LAN_IP_HERE:53:5054/udp"
     networks:
